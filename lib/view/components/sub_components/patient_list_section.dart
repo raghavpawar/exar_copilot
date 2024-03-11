@@ -58,7 +58,7 @@ class _PatientListState extends State<PatientList> {
             margin: EdgeInsets.only(top: screenWidth! / 96), //15
             child: (newPatients.isEmpty)
                 ? FutureBuilder(
-                    future: patientListProvider.fetchPatientsList(),
+                    future: patientListProvider.fetchPatientsList(context),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -85,9 +85,8 @@ class _PatientListState extends State<PatientList> {
   Widget _buildListView(List<Patient> foundPatients, BuildContext context,
       List<Patient> newPatients) {
     return ListView.builder(
-      itemCount: newPatients.length,
+      itemCount: foundPatients.length,
       itemBuilder: (context, index) {
-        foundPatients = List.from(newPatients);
         return TextButton(
           onPressed: () => btnPressed(index),
           style: Theme.of(context).textButtonTheme.style,
