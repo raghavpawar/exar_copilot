@@ -6,11 +6,6 @@ import 'package:provider/provider.dart';
 class SearchFieldProvider extends ChangeNotifier {
   List<Patient> foundPatients = [];
 
-  void setPatients(List<Patient> patients) {
-    foundPatients = patients;
-    notifyListeners();
-  }
-
   void setSearchField(String value, BuildContext context) {
     if (value.isEmpty) {
       final patientListProvider =
@@ -18,14 +13,14 @@ class SearchFieldProvider extends ChangeNotifier {
       final searchFieldProvider =
           Provider.of<SearchFieldProvider>(context, listen: false);
       searchFieldProvider.foundPatients =
-          List.from(patientListProvider.patients);
+          List.from(patientListProvider.newPatients);
     }
     notifyListeners();
   }
 
   void searchPatient(String value, BuildContext context) {
     foundPatients = Provider.of<PatientListProvider>(context, listen: false)
-        .patients
+        .newPatients
         .where((element) => element.name.toLowerCase().contains(value))
         .toList();
     notifyListeners();
