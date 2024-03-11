@@ -74,16 +74,12 @@ class _AddPatientDialogState extends State<AddPatientDialog> {
                 String gender = _genderController.text;
                 int age = int.tryParse(_ageController.text) ?? 0;
                 if (!(name.isEmpty || gender.isEmpty || age == 0)) {
-                  print('adding patient ');
                   patientListProvider.addPatient(
                     Patient(name: name, gender: gender, age: age),
                   );
-                  print('1 ' + patientListProvider.patients.last.name);
                   final searchFieldProvider =
                       Provider.of<SearchFieldProvider>(context, listen: false);
-                  print(searchFieldProvider.foundPatients.last.name);
                   searchFieldProvider.setSearchField('', context);
-                  print('2 ' + searchFieldProvider.foundPatients.last.name);
                 } else {
                   null;
                 }

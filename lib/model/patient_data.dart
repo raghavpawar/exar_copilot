@@ -4,6 +4,12 @@ class Patient {
   final int age;
 
   Patient({required this.name, required this.gender, required this.age});
+
+  factory Patient.fromJson(Map<String, dynamic> json) {
+    return Patient(
+      name: json['firstName'],
+      gender: json['gender'],
+      age: json['age'],
+    );
+  }
 }
-
-
